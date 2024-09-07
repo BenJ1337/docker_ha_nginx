@@ -1,0 +1,13 @@
+services:
+  ha-proxy:
+    container_name: ha-proxy
+    image: nginx:1.27
+    restart: unless-stopped
+    volumes:
+    - ./config/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    - /letsencrypt:/etc/ssl/:ro
+    networks:
+      - ha_network
+networks:
+  ha_network:
+    external: true
